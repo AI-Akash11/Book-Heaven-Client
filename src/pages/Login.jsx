@@ -1,20 +1,41 @@
-import React, { useContext } from 'react';
-import { FaEyeSlash } from 'react-icons/fa';
+import React, { useContext, useState } from 'react';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
 import toast from 'react-hot-toast';
 
 const Login = () => {
-  const {signInWithGoogle} = useContext(AuthContext);
+  const {signInWithGoogle, signInUser} = useContext(AuthContext);
+    const [eye, setEye] = useState(true)
+
   const navigate = useNavigate();
+
+
+  const handleLogin = (e) => {
+    e.preventDefault();
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    signInUser(email, password)
+    .then(res=>{
+      console.log(res.user)
+      navigate('/')
+      toast.success("Login Successful")
+    }
+    )
+    .catch(err=>{
+      console.log(err);
+      toast.error(err.message)
+    })
+  }
 
 
   const handleGoogleSignIn = () =>{
     signInWithGoogle()
     .then(result =>{
       console.log(result.user);
-      toast.success('user logged in via google')
       navigate('/')
+      toast.success('user logged in via google')
     })
     .catch(error=>{
       console.log(error)
@@ -29,7 +50,7 @@ const Login = () => {
         </h2>
 
         <form
-        
+        onSubmit={handleLogin}
         className="flex flex-col gap-1 relative">
           <label className="text-sm  mt-3 ml-1">Email</label>
           <input
@@ -41,16 +62,19 @@ const Login = () => {
 
           <label className="text-sm  mt-3 ml-1">Password</label>
           <input
-            type="password"
+            type={eye ? "password" : "text"}
             name="password"
             placeholder="Password"
             className="px-3 py-2 rounded-xl bg-[#e0e5ec] shadow-inner shadow-[#a3b1c6]/70 outline-none"
           />
 
           <div
+            onClick={() => {
+              setEye(!eye);
+            }}
             className="absolute right-4 top-[125px] text-xl cursor-pointer"
           >
-            <FaEyeSlash></FaEyeSlash>
+            {eye ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
           </div>
 
           <p className="text-center mt-4 text-gray-600 text-sm hover:underline hover:underline-offset-2">

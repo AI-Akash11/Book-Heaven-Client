@@ -1,9 +1,11 @@
 import React from 'react';
+import Spinner from '../components/Spinner';
+import Banner from '../components/Banner';
 
 const Home = () => {
     return (
         <div>
-            Home sweet home
+            <Banner></Banner>
         </div>
     );
 };

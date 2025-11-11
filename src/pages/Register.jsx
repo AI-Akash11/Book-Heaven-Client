@@ -9,11 +9,11 @@ const Register = () => {
   const [photoError, setPhotoError] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [eye, setEye] = useState(true);
 
 
   const { signInWithGoogle, createUser, updateUser, setUser } = useContext(AuthContext);
 
-  const [eye, setEye] = useState(true);
   const navigate = useNavigate();
 
 

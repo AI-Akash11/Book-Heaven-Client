@@ -2,9 +2,10 @@ import React, { useContext } from "react";
 import { Link, NavLink } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
+import Spinner from "./Spinner";
 
 const Navbar = () => {
-  const { user, signOutUser } = useContext(AuthContext);
+  const { user, signOutUser,loading } = useContext(AuthContext);
 
   const handleLogOut = () => {
     signOutUser()
@@ -66,7 +67,12 @@ const Navbar = () => {
       <div className="navbar-center hidden lg:flex">
         <ul className="menu menu-horizontal px-1">{links}</ul>
       </div>
-      <div className="navbar-end flex gap-2">
+      {
+        loading
+        ?
+        <div className="navbar-end"><Spinner></Spinner></div>
+          :
+        <div className="navbar-end flex gap-2">
         {user ? (
           <div className="dropdown dropdown-hover dropdown-end">
             <img src={user.photoURL} tabIndex={0} role="button" className="m-1 rounded-full max-w-10">
@@ -105,6 +111,7 @@ const Navbar = () => {
           </>
         )}
       </div>
+      }
     </div>
   );
 };
