@@ -1,19 +1,99 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { Link, useNavigate } from "react-router";
 import { AuthContext } from "../context/AuthContext";
 import toast from "react-hot-toast";
 
 const Register = () => {
-  const { signInWithGoogle } = useContext(AuthContext);
+  const [nameError, setNameError] = useState("");
+  const [photoError, setPhotoError] = useState("");
+  const [emailError, setEmailError] = useState("");
+  const [passwordError, setPasswordError] = useState("");
+
+
+  const { signInWithGoogle, createUser, updateUser, setUser } = useContext(AuthContext);
+
+  const [eye, setEye] = useState(true);
   const navigate = useNavigate();
+
+
+
+  const handleSignIn = (e) => {
+    e.preventDefault();
+
+    const form = e.target;
+    let hasError = false;
+
+    const name = form.name.value;
+    if(name.length < 3){
+      setNameError("Name should be more the 3 charecter");
+      hasError = true;
+    } else{
+      setNameError("");
+    }
+
+    const photo = form.photo.value;
+    if (!/^https?:\/\/.+/.test(photo)) {
+      setPhotoError(
+        "Please enter a valid photo URL starting with http or https"
+      );
+      hasError = true;
+    } else {
+      setPhotoError("");
+    }
+
+    const email = form.email.value;
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      setEmailError("Please enter a valid email address");
+      hasError = true;
+    } else {
+      setEmailError("");
+    }
+
+    const password = form.password.value;
+    const passwordRegex =
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
+    if (!passwordRegex.test(password)) {
+      setPasswordError(
+        "Password must be at least 8 chars long, include uppercase, lowercase, number, and special character"
+      );
+      hasError = true;
+    } else {
+      setPasswordError("");
+    }
+
+    if (hasError) return;
+
+
+    console.log({name, email, photo, password})
+
+    createUser(email, password)
+    .then(result =>{
+      console.log(result.user)
+      const user = result.user;
+      updateUser({displayName: name, photoURL: photo})
+      .then(()=>{ 
+        setUser({...user,displayName:name, photoURL: photo});
+        navigate('/');
+        toast.success("Account succesfully created")
+      })
+      .catch(error =>{
+        console.log(error);
+        setUser(user);
+      })
+    })
+    .catch(err =>{
+      console.log(err)
+      toast.error(err.message)
+    })
+  };
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then((result) => {
         console.log(result.user);
-        toast.success("user logged in via google");
-        navigate('/')
+        navigate("/");
+        toast.success("user logged in with google");
       })
       .catch((error) => {
         console.log(error);
@@ -27,7 +107,7 @@ const Register = () => {
           Register
         </h2>
 
-        <form className="flex flex-col gap-1 relative">
+        <form onSubmit={handleSignIn} className="flex flex-col gap-1 relative">
           <label className="text-sm  mt-3 ml-1">Name</label>
           <input
             type="text"
@@ -35,6 +115,7 @@ const Register = () => {
             placeholder="Enter Your Name"
             className="px-3 py-2 rounded-xl bg-[#e0e5ec] shadow-inner shadow-[#a3b1c6]/70 outline-none"
           />
+          {nameError && <p className="text-xs text-error">{nameError}</p>}
 
           <label className="text-sm  mt-3 ml-1">Photo URL</label>
           <input
@@ -43,6 +124,7 @@ const Register = () => {
             placeholder="Enter a photo URL"
             className="px-3 py-2 rounded-xl bg-[#e0e5ec] shadow-inner shadow-[#a3b1c6]/70 outline-none"
           />
+          {photoError && <p className="text-xs text-error">{photoError}</p>}
 
           <label className="text-sm  mt-3 ml-1">Email</label>
           <input
@@ -51,17 +133,26 @@ const Register = () => {
             placeholder="Email"
             className="px-3 py-2 rounded-xl bg-[#e0e5ec] shadow-inner shadow-[#a3b1c6]/70 outline-none"
           />
+          {emailError && <p className="text-xs text-error">{emailError}</p>}
 
           <label className="text-sm  mt-3 ml-1">Password</label>
           <input
-            type="password"
+            type={eye ? "password" : "text"}
             name="password"
             placeholder="Password"
             className="px-3 py-2 rounded-xl bg-[#e0e5ec] shadow-inner shadow-[#a3b1c6]/70 outline-none"
           />
-          <div className="absolute right-4 top-[287px] text-xl cursor-pointer">
-            <FaEyeSlash></FaEyeSlash>
+          <div
+            onClick={() => {
+              setEye(!eye);
+            }}
+            className="absolute right-4 top-[287px] text-xl cursor-pointer"
+          >
+            {eye ? <FaEyeSlash></FaEyeSlash> : <FaEye></FaEye>}
           </div>
+          {passwordError && (
+            <p className="text-xs text-error">{passwordError}</p>
+          )}
 
           <button
             type="submit"
@@ -74,8 +165,8 @@ const Register = () => {
         <div className="text-center mt-4 text-gray-600 text-sm">
           Already have an account?{" "}
           <Link
-            to={"/auth/login"}
-            className="text-green-500 font-semibold underline underline-offset-4"
+            to={"/login"}
+            className="text-accent font-semibold underline underline-offset-4"
           >
             Login
           </Link>
@@ -87,9 +178,10 @@ const Register = () => {
           <hr className="flex-grow border-t border-gray-400" />
         </div>
 
-        <button 
-        onClick={handleGoogleSignIn}
-        className="btn bg-white text-black border-[#e5e5e5] w-full py-6 text-lg rounded-xl">
+        <button
+          onClick={handleGoogleSignIn}
+          className="btn bg-white text-black border-[#e5e5e5] w-full py-6 text-lg rounded-xl"
+        >
           <svg
             aria-label="Google logo"
             width="24"

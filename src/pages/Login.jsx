@@ -53,13 +53,13 @@ const Login = () => {
             <FaEyeSlash></FaEyeSlash>
           </div>
 
-          <Link to={'/auth/forget-pass'} className="text-center mt-4 text-gray-600 text-sm hover:underline hover:underline-offset-2">
+          <p className="text-center mt-4 text-gray-600 text-sm hover:underline hover:underline-offset-2">
             Forgot your password?
-          </Link>
+          </p>
 
           <button
             type="submit"
-            className="mt-2 w-full py-3 rounded-xl bg-accent shadow-[5px_5px_10px_#a3b1c6,-5px_-5px_10px_#ffffff] font-bold hover:bg-green-500 transition text-xl text-white"
+            className="mt-2 w-full py-3 rounded-xl bg-accent shadow-[5px_5px_10px_#a3b1c6,-5px_-5px_10px_#ffffff] font-bold hover:bg-teal-500 transition text-xl text-white"
           >
             Login
           </button>
@@ -68,10 +68,10 @@ const Login = () => {
         <div className="text-center mt-4 text-gray-600 text-sm">
           Dont have an account?{" "}
           <Link
-            to={"/auth/signup"}
+            to={"/register"}
             className="text-yellow-400 font-semibold underline underline-offset-4"
           >
-            Sign In
+            Register
           </Link>
         </div>
 
