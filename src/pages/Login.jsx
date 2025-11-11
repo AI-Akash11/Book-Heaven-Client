@@ -1,11 +1,11 @@
 import React, { useContext } from 'react';
 import { FaEyeSlash } from 'react-icons/fa';
-import { Link } from 'react-router';
+import { Link, useNavigate } from 'react-router';
 import { AuthContext } from '../context/AuthContext';
 
 const Login = () => {
   const {signInWithGoogle} = useContext(AuthContext);
-
+  const navigate = useNavigate();
 
 
   const handleGoogleSignIn = () =>{
@@ -13,6 +13,7 @@ const Login = () => {
     .then(result =>{
       console.log(result.user);
       alert('user logged in via google')
+      navigate('/')
     })
     .catch(error=>{
       console.log(error)
