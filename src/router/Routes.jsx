@@ -7,6 +7,7 @@ import MyBooks from "../pages/MyBooks";
 import Login from "../pages/Login";
 import Register from "../pages/Register";
 import PrivateRoute from "./PrivateRoute";
+import BookDetails from "../pages/BookDetails";
 
 const router = createBrowserRouter([
     {
@@ -43,6 +44,10 @@ const router = createBrowserRouter([
                 path:'/register',
                 Component: Register
             },
+            {
+                path: '/book-details/:id',
+                element: <BookDetails/>
+            }
         ]
     }
 ]);

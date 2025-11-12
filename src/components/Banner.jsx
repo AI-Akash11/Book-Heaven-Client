@@ -29,7 +29,7 @@ const Banner = () => {
 
   return (
     <div
-      className="relative h-[60vh] w-full overflow-hidden flex items-center justify-center"
+      className="relative lg:min-h-[500px] h-[60vh] w-full overflow-hidden flex items-center justify-center"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
     >
