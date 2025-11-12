@@ -69,7 +69,7 @@ const AllBooks = () => {
         <p className="text-red-600 mb-4">{error}</p>
         <button
           onClick={() => window.location.reload()}
-          className="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700"
+          className="px-4 py-2 bg-teal-600 text-white rounded hover:bg-teal-700"
         >
           Retry
         </button>
@@ -79,7 +79,7 @@ const AllBooks = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="mb-6 text-3xl font-bold text-center text-gray-800">
+      <h1 className="mb-6 text-3xl  md:text-4xl font-bold text-center text-amber-600">
         All Books
       </h1>
 
@@ -91,7 +91,7 @@ const AllBooks = () => {
           {/* ========== DESKTOP ========== */}
           <div className="hidden lg:block">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-indigo-600 text-white">
+              <thead className="bg-teal-600 text-white">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Cover</th>
                   <th className="px-6 py-3 text-left text-xs font-medium uppercase tracking-wider">Title</th>
@@ -118,7 +118,7 @@ const AllBooks = () => {
                       <td className="px-6 py-4 text-sm font-medium text-gray-900 max-w-xs truncate">{title}</td>
                       <td className="px-6 py-4 text-sm text-gray-700">{author}</td>
                       <td className="px-6 py-4 whitespace-nowrap">
-                        <span className="px-2 py-1 text-xs font-medium text-indigo-600 bg-indigo-50 rounded-full">
+                        <span className="px-2 py-1 text-xs font-medium text-teal-600 bg-teal-50 rounded-full">
                           {genre}
                         </span>
                       </td>
@@ -126,7 +126,7 @@ const AllBooks = () => {
                       <td className="px-6 py-4 text-center">
                         <Link
                           to={`/book-details/${id}`}
-                          className="inline-block px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded hover:bg-indigo-700 transition"
+                          className="inline-block px-4 py-2 text-sm font-medium text-white bg-teal-600 rounded hover:bg-teal-700 transition"
                         >
                           View Details
                         </Link>
@@ -141,7 +141,7 @@ const AllBooks = () => {
           {/* ========== MEDIUM TABLET ========== */}
           <div className="hidden md:block lg:hidden">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-indigo-600 text-white">
+              <thead className="bg-teal-600 text-white">
                 <tr>
                   <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Cover</th>
                   <th className="px-4 py-3 text-left text-xs font-medium uppercase tracking-wider">Title & Author</th>
@@ -169,7 +169,7 @@ const AllBooks = () => {
                       </td>
                       <td className="px-4 py-4">
                         <div className="mb-2">
-                          <span className="px-2 py-1 text-xs font-medium text-indigo-600 bg-indigo-50 rounded-full">
+                          <span className="px-2 py-1 text-xs font-medium text-teal-600 bg-teal-50 rounded-full">
                             {genre}
                           </span>
                         </div>
@@ -178,7 +178,7 @@ const AllBooks = () => {
                       <td className="px-4 py-4 text-center">
                         <Link
                           to={`/book-details/${id}`}
-                          className="inline-block px-4 py-2 text-sm font-medium text-white bg-indigo-600 rounded hover:bg-indigo-700 transition"
+                          className="inline-block px-4 py-2 text-sm font-medium text-white bg-teal-600 rounded hover:bg-teal-700 transition"
                         >
                           View Details
                         </Link>
@@ -193,7 +193,7 @@ const AllBooks = () => {
           {/* ========== SMALL TABLET  ========== */}
           <div className="hidden sm:block md:hidden">
             <table className="min-w-full divide-y divide-gray-200">
-              <thead className="bg-indigo-600 text-white">
+              <thead className="bg-teal-600 text-white">
                 <tr>
                   <th className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider">Cover</th>
                   <th className="px-3 py-3 text-left text-xs font-medium uppercase tracking-wider">Book Details</th>
@@ -218,7 +218,7 @@ const AllBooks = () => {
                         <div className="text-sm font-semibold text-gray-900 truncate mb-1">{title}</div>
                         <div className="text-xs text-gray-600 mb-1">by {author}</div>
                         <div className="flex items-center gap-2 mb-2 flex-wrap">
-                          <span className="px-2 py-1 text-xs font-medium text-indigo-600 bg-indigo-50 rounded-full">
+                          <span className="px-2 py-1 text-xs font-medium text-teal-600 bg-teal-50 rounded-full">
                             {genre}
                           </span>
                           <div className="text-xs">{renderStars(rating)}</div>
@@ -227,7 +227,7 @@ const AllBooks = () => {
                       <td className="px-3 py-4 text-center">
                         <Link
                           to={`/book-details/${id}`}
-                          className="inline-block w-full px-3 py-2 text-xs font-medium text-white bg-indigo-600 rounded hover:bg-indigo-700 transition"
+                          className="inline-block w-full px-3 py-2 text-xs font-medium text-white bg-teal-600 rounded hover:bg-teal-700 transition"
                         >
                           View Details
                         </Link>
@@ -273,7 +273,7 @@ const AllBooks = () => {
                           by <span className="font-medium">{author}</span>
                         </p>
                         <div className="flex flex-wrap items-center gap-2">
-                          <span className="px-2 py-1 text-xs font-medium text-indigo-600 bg-indigo-50 rounded-full">
+                          <span className="px-2 py-1 text-xs font-medium text-teal-600 bg-teal-50 rounded-full">
                             {genre}
                           </span>
                           <div className="text-sm">{renderStars(rating)}</div>
@@ -284,7 +284,7 @@ const AllBooks = () => {
                     {/* Button at Bottom */}
                     <Link
                       to={`/book-details/${id}`}
-                      className="mt-auto block w-full text-center px-6 py-2.5 text-sm font-medium text-white bg-indigo-600 rounded-lg hover:bg-indigo-700 transition"
+                      className="mt-auto block w-full text-center px-6 py-2.5 text-sm font-medium text-white bg-teal-600 rounded-lg hover:bg-teal-700 transition"
                     >
                       View Details
                     </Link>

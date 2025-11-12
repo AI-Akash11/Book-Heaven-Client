@@ -73,7 +73,7 @@ const BookDetails = () => {
         <p className="text-red-600 text-lg mb-4">{error}</p>
         <button
           onClick={() => navigate(-1)}
-          className="inline-flex items-center gap-2 text-indigo-600 hover:underline font-medium"
+          className="inline-flex items-center gap-2 text-teal-600 hover:underline font-medium"
         >
           <ArrowLeft className="w-5 h-5" />
           Go Back
@@ -89,7 +89,7 @@ const BookDetails = () => {
         <p className="text-gray-600">Book not found.</p>
         <button
           onClick={() => navigate(-1)}
-          className="mt-4 inline-flex items-center gap-2 text-indigo-600 hover:underline"
+          className="mt-4 inline-flex items-center gap-2 text-teal-600 hover:underline"
         >
           <ArrowLeft className="w-5 h-5" />
           Go Back
@@ -112,7 +112,7 @@ const BookDetails = () => {
       {/* Back Button */}
       <button
         onClick={() => navigate(-1)}
-        className="mb-6 inline-flex items-center gap-2 text-indigo-600 hover:underline font-medium transition"
+        className="mb-6 inline-flex items-center gap-2 text-teal-600 hover:underline font-medium transition"
       >
         <ArrowLeft className="w-5 h-5" />
         Back
@@ -146,7 +146,7 @@ const BookDetails = () => {
             </p>
 
             {/* Genre */}
-            <p className="text-sm font-medium text-indigo-600 bg-indigo-50 inline-block px-3 py-1 rounded-full">
+            <p className="text-sm font-medium text-teal-600 bg-teal-50 inline-block px-3 py-1 rounded-full">
               {genre}
             </p>
 
