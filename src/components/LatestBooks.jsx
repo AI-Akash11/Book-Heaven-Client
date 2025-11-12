@@ -77,13 +77,13 @@ const LatestBooks = () => {
                   <img
                     src={cover}
                     alt={title}
-                    className="w-[80%] object-cover rounded-lg"
+                    className="w-[80%] max-h-[420px] object-cover rounded-lg"
                     onError={(e) => (e.target.src = "https://via.placeholder.com/200x280?text=No+Image")}
                   />
                 </div>
 
                 {/* Book Info - Takes remaining space */}
-                <div className="flex-1 space-y-2">
+                <div className="flex-1 flex flex-col justify-end space-y-2">
                   <h3 className="font-semibold text-lg text-gray-900 line-clamp-2 leading-tight">
                     {title}
                   </h3>
